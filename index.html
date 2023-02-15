@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>Focus - لقاء البابا الثامن </title>
+  <title>اللقاء الثامن للمغتربين</title>
   <!-- Styles -->
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="style.css">
   <script type="module"> // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
@@ -30,6 +31,7 @@
   
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
     import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
     // const setID = document.querySelector('#set')
     // const getID = document.querySelector('#get')
@@ -43,12 +45,12 @@
 
     const nowTime = document.getElementById("time_now")
     const getData = ()=>{
-      nowTime.innerHTML = "يتم تحميل البيانات ....."
+      nowTime.innerHTML = "بنحمل ليك ايه اللي شغال دلوقتي ......"
       const dbRef = ref(db)
       get(child(dbRef , 'now')).then((snapshot)=>{
         nowTime.innerHTML = snapshot.val()
       }).catch(()=>{
-        nowTime.innerHTML = "خطأ في الاتصال بالانترنت"
+        nowTime.innerHTML = "فيه مشكلة في الانترنت"
       })
     }
     getData()
@@ -56,7 +58,7 @@
 
     const warning = document.getElementById('all_warnings')
     const getWarnings = () => {
-      warning.innerHTML = "يتم تحميل البيانات ....."
+      warning.innerHTML = "بنحمل ليك الاعلانات و التنبيهات....." 
       const dbRef = ref(db)
       get(child(dbRef , 'warning')).then((snapshot)=>{
         if(snapshot.val()=="") {
@@ -65,7 +67,7 @@
           warning.innerHTML = snapshot.val()
         }
       }).catch(()=>{
-        warning.innerHTML = "خطأ في الاتصال بالانترنت"
+        warning.innerHTML = "فيه مشكلة في الانترنت"
       })
     }
     getWarnings()
@@ -78,7 +80,7 @@
     const sendBtn = document.querySelector('#sendMsg') 
     const sendMsgToFireBase = ()=>{
         if(message.value.trim()=="") {
-          alert("برجاء ادخال الرسالة")
+          alert("لازم تبعت رسالة")
         } else {
         form_spinner[0].style.display = "block"
           set(ref(db , `/feedacks/${nameUser.value+"_"+phone.value}`) , {
@@ -87,10 +89,10 @@
               phone : phone.value , 
               message : message.value
          }).then(()=>{
-              alert("تم الارسال بنجاح شكرا للإهتمام")
+              alert("رسالتك وصلت و هنرد عليك في اقرب وقت")
               form_spinner[0].style.display = "none"
              }).catch(()=>{
-              alert("حدث خطأ في الاتصال بالإنترنت")
+              alert("فيه مشكلة في النت , جرب تاني")
               form_spinner[0].style.display = "none"
              })
         }
@@ -124,7 +126,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#SMF">اللقاء</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item d-none">
             <a class="nav-link" href="#contacts">الطوارئ</a>
           </li>
           <li class="nav-item">
@@ -142,8 +144,10 @@
   </nav>
   <!-- NavBar -->
   <!-- alerts -->
-  <div class="alert alert-success text-center" role="alert"> هنا دليلك لكل ما يخص اللقاء </div>
-  <div class="alert alert-dark" role="alert" id="all_warnings"> أية تعديلات او تحذيرات مهمة بخصوص اللقاء سوف تظهر هنا
+  <div class="alert alert-success text-center" role="alert" id="name">   </div>
+  <div class="alert alert-success text-center" role="alert"> ده دليلك لكل حاجة في اللقاء  </div>
+  <div class="alert alert-dark" role="alert"> 
+    <p id="all_warnings" class="w-75"></p>
   </div>
   <!-- alerts -->
   <!-- logos -->
@@ -164,10 +168,10 @@
     </div>
   </div>
   <!-- Logos -->
-  <section class="qr d-flex justify-content-center">
+  <section class="qr d-flex justify-content-center MY-4">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-dark m-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      احصل علي ال QR </button>
+      تقدر تحمل QR الدليل من هنا و تشاركه مع صحابك </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -225,12 +229,12 @@
     <div class="content">
       <h2 class="text-center p-2">البرنامج</h2>
       <div class="now text-center">
-        <h3>الأن وقت</h3>
+        <h3>دلوقتي اللي شغال</h3>
         <h5 id="time_now"></h5>
       </div>
-      <div class="alert alert-danger mt-2" role="alert"> قد يحدث احيانا تغيير في المواعيد بناءا علي وصول الأباء و
-        المتكلمين </div>
-      <div class="downloads row align-items-center justify-content-center">
+      <div class="alert alert-danger mt-2 text-center" role="alert"> ساعات بيحصل تغيير في المواعيد بسبب تأخير بعض المتكلمين او حدوث ظرف مفاجئ و ساعتها هنبلغك هنا 
+         </div>
+      <div class="downloads d-none row align-items-center justify-content-center">
         <a href="./assets/imgs/programs/program1.jpg" download class="btn btn-outline-primary col-md-5">تحميل برنامج
           اليوم الاول</a>
         <a href="./assets/imgs/programs/program2.jpg" download class="btn btn-outline-primary col-md-5">تحميل برنامج
@@ -432,6 +436,52 @@
     </div>
   </section>
   <!-- Program -->
+  <!-- Arts -->
+  <section class="arts my-4 p-5 m-auto text-center">
+    <h3 class="my-3">فرق اللقاء الفنية</h3>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./assets/imgs/bands/elmes_edena_band.jpg" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>باند إلمس ايدينا</h5>
+            <p>هيكون معانا في فقرات كتير زي كل اللقاءات اللي فاتت و هنرم كلنا سوا</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./assets/imgs/bands/theater.jpg" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>فريق مسرح الأسد المرقسي </h5>
+            <p>هيكون معانا و هيمتعنا بعرض مسرحي متميز زي كل مرة</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./assets/imgs/bands/choir.jpg" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Third slide label</h5>
+            <p>Some representative placeholder content for the third slide.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+  <!-- Arts -->
+
+
+
   <!-- Speakers -->
   <section class="speakers p-3 mt-3" id="speakers">
     <h2 class="text-center p-2">المتكلمين</h2>
@@ -524,7 +574,7 @@
           href="https://ar.wikipedia.org/wiki/%D9%85%D8%A7%D8%B1%D9%8A%D8%A7%D9%86_%D8%B9%D8%A7%D8%B2%D8%B1">لمعرفة
           المزيد</a>
       </div>
-      <figure class="w-25">
+      <figure class="w-75">
         <img src="./assets/imgs/speakers/marian.png" alt="" class="w-100">
       </figure>
     </div>
@@ -533,17 +583,16 @@
   <!-- Feedback -->
   <section class="feedback bg-black d-flex justify-content-center p-5 my-5" id="feedback">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> اترك لنا
-      رسالتك </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> سيب لينا رسالة </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">أترك لنا رسالتك</h5>
+            <h5 class="modal-title" id="exampleModalLabel">متحمسين نعرف هتقولنا ايه ؟ </h5>
           </div>
           <div class="modal-body">
-            <div class="alert alert-success text-center" role="alert"> يمكنك الارسال من دون معلوماتك الشخصية </div>
+            <div class="alert alert-success text-center" role="alert">ممكن تبعت عادي من غير ما تكتب معلوماتك الشخصية  </div>
             <form>
               <div class="mb-3">
                 <label for="name" class="form-label">الإسم</label>
@@ -554,7 +603,7 @@
                 <input type="email" class="form-control" id="email" placeholder="name@example.com">
               </div>
               <div class="mb-3">
-                <label for="phone" class="form-label">رقم الهاتف</label>
+                <label for="phone" class="form-label">رقم الموبايل</label>
                 <input type="text" class="form-control" id="phone" placeholder="201005434984+">
               </div>
               <div class="form-floating">
@@ -568,8 +617,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">أغلق</button>
-            <button type="button" class="btn btn-primary" id="sendMsg">إرسال</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اقفل</button>
+            <button type="button" class="btn btn-primary" id="sendMsg">إبعت</button>
           </div>
         </div>
       </div>
@@ -578,9 +627,9 @@
   <!-- Feedback -->
   <!-- Short about conference -->
   <section class="short container d-flex justify-content-center align-items-center flex-column p-3" id="SMF">
-    <h2 class="my-4 text-center">اللقاء السنوي الثامن للمغتربين مع البابا تواضروس الثانى</h2>
+    <h2 class="my-4 text-center">أنشطة اسرة مارمرقس</h2>
     <a href="https://www.facebook.com/events/3014926525469856" target="_blank"
-      class="btn btn-outline-primary my-3">اللقاء علي منصات التواصل الاجتماعي</a>
+      class="btn btn-outline-primary my-3">شوفنا علي الفيسبوك</a>
     <iframe width="350" height="315" src="https://www.youtube.com/embed/6aUhm9YNtE0" title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -589,8 +638,7 @@
   <!-- Short about conference -->
   <!-- Location -->
   <section class="location my-5 text-center" id="location">
-    <h2 class="my-4">موقع بيت سمعان الخراز</h2>
-    <h5 class="my-4">وادي النطرون</h5>
+    <h2 class="my-4">مكان بيت سمعان الخراز علي الخريطة</h2>
     <div class="container">
       <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3440.317376557768!2d30.333908100000002!3d30.427103700000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458b750472b38f9%3A0xa2b3021e0cc04818!2sST.%20Simon!5e0!3m2!1sen!2seg!4v1676452873411!5m2!1sen!2seg"
@@ -600,7 +648,7 @@
   </section>
   <!-- Location -->
   <!-- Important Contacts -->
-  <section class="important-contact p-3" id="contacts">
+  <section class="important-contact d-none p-3" id="contacts">
     <h5 class="my-4 text-center">في حالة وجود طوارئ , اسئلة او استفسارات اتصل علي الارقام التالية</h5>
     <table class="table">
       <thead>
@@ -649,6 +697,7 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
   </script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./script.js"></script>
 </body>
 
 </html>

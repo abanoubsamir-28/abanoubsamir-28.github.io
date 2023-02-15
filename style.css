@@ -20,6 +20,13 @@
     -o-border-radius: 12px;
 }
 
+#all_warnings {
+    word-break: break-all;
+    text-align: center;
+    margin: auto;
+    font-weight: 800;
+    color: red;
+}
 
 
 .program {

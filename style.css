@@ -41,6 +41,10 @@
     margin: 10px;
     padding: 10px;
 }
+.important-contact {
+    background-color: #eceef0;
+
+}
 .accordion-button::after {
     margin-left: unset;
     margin-right: auto;

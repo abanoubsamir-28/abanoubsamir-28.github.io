@@ -98,6 +98,23 @@
         }
         }
     sendBtn.addEventListener('click' , sendMsgToFireBase)
+    const initName = () => {
+      const nameContainer = document.querySelector('#name')
+    let nameUser = localStorage.getItem('name') 
+      if(nameUser) {
+      nameContainer.innerHTML = `اهلا بيك يا ${nameUser}`
+    } else {
+    let getName = prompt("اهلا بيك في دليلك للقاء المغتربين الثامن , ممكن تقولنا اسمك ؟ ")
+    if(getName) {
+      localStorage.setItem('name' , getName) 
+      nameContainer.innerHTML = `اهلا بيك يا ${getName}`
+    } else {
+      nameContainer.innerHTML = "مش راضي يقول اسمه"
+    }
+
+}
+    }
+    initName()
   </script>
 </head>
 
@@ -508,7 +525,7 @@
     </div>
     <div class="item d-flex">
       <div class="content w-75 my-auto">
-        <h4>الأنبا رافائيل أسقف عام وسط القاهرة</h4>
+        <h4>الأنبا رافائيل أسقف عام كنائس وسط القاهرة</h4>
         <a target="_blank" class="btn btn-outline-primary"
           href="https://st-takla.org/Saints/bishops/raa/rafail-cairo.html">لمعرفة المزيد</a>
       </div>
@@ -697,7 +714,6 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
   </script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./script.js"></script>
 </body>
 
 </html>

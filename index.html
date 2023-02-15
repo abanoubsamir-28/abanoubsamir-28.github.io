@@ -108,6 +108,11 @@
     if(getName) {
       localStorage.setItem('name' , getName) 
       nameContainer.innerHTML = `اهلا بيك يا ${getName}`
+      set(ref(db , `/names/${Date.now()}`) , getName).then(()=>{
+            console.log("name set")
+             }).catch(()=>{
+              console.log("errors")
+             })
     } else {
       nameContainer.innerHTML = "مش راضي يقول اسمه"
     }
@@ -694,6 +699,15 @@
     </table>
   </section>
   <!-- Important Contacts -->
+
+
+
+
+  <!-- songs -->
+  <section class="songs">
+
+  </section>
+  <!-- songs -->
   <!-- Footer -->
   <footer class="bg-dark text-white text-center text-lg-start" id="social">
     <!-- Copyright -->

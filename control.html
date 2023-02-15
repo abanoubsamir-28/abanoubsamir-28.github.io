@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم مصغرة للقاء البابا</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script type="module"> // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCxrOhWM4A65Rrv6qE9EXB5_Mvf4IO0G7o",
+          authDomain: "smf8prod.firebaseapp.com",
+          projectId: "smf8prod",
+          storageBucket: "smf8prod.appspot.com",
+          messagingSenderId: "1051821850021",
+          appId: "1:1051821850021:web:d729e9e1e19ef14446fc4c"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+        const db = getDatabase()
+        const sendTimeBtn = document.querySelector('#sendTime') 
+        const sendWarningBtn = document.querySelector('#sendWarning')
+        const timeInput = document.querySelector('#time')
+        const msgInput = document.querySelector('#msg')
+        const sendTimeNow = ()=>{
+            set(ref(db , "/now") , 
+            `${timeInput.value}`
+            ).then(()=>{
+                alert("تم التغيير")
+            }).catch(()=>{
+                alert("حدث خطأ")
+            })
+        }
+        const sendWarningNow = () =>{
+            set(ref(db , "/warning") , 
+            `${msgInput.value}`
+            ).then(()=>{
+                alert("تم التغيير")
+            }).catch(()=>{
+                alert("حدث خطأ")
+            })
+        }
+        sendTimeBtn.addEventListener('click' , sendTimeNow)
+        sendWarningBtn.addEventListener('click',sendWarningNow)
+      </script>
+</head>
+<body>
+    <main class="container my-5">
+            <div class="mb-3">
+              <label for="name" class="form-label">ضع توقيت البرنامج</label>
+              <input type="text" class="form-control" id="time" placeholder="محاضرة أبونا داود لمعي">
+            </div>
+            <button class="btn btn-primary mb-2" id="sendTime">تغيير البرنامج</button>
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="msg"
+                style="height: 100px"></textarea>
+              <label for="floatingTextarea2">ضع التحذيرات او الإعلانات</label>
+            </div>
+            <button class="btn btn-primary mt-2" id="sendWarning">اضافة اعلان او تحذير</button>
+
+    </main>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

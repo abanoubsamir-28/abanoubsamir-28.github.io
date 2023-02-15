@@ -1,0 +1,64 @@
+.nav-item {
+    padding: 10px;
+}
+.nav-item a {
+    padding: 20px;
+    font-weight: 900;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+.nav-item:hover a {
+    background-color: black;
+    color: white !important;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+
+
+.program {
+    background-color: #eceef0;
+}
+.alert {
+    font-weight: 600;
+}
+.now {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+.downloads a {
+    margin: 10px;
+    padding: 10px;
+}
+.accordion-button::after {
+    margin-left: unset;
+    margin-right: auto;
+}
+.table td {
+    font-weight: 600;
+}
+
+.speakers h4 {
+    width: 95%;
+}
+.short {
+    background-color: #eceef0;
+
+}
+.social-media a {
+    font-size: 30px;
+}
+.form-spinner {
+    display: none;
+}

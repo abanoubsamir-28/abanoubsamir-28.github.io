@@ -116,10 +116,31 @@
     } else {
       nameContainer.innerHTML = "مش راضي يقول اسمه"
     }
-
 }
     }
     initName()
+
+    const getId = () =>{
+      let id = localStorage.getItem('id')
+      if(!id) {
+        const idContainer = document.getElementsByClassName('getID')
+        idContainer[0].style.display = 'flex'
+        // idContainer.style.display = 'block !important'
+      } else {
+        const idContainer = document.getElementsByClassName('getID')
+        idContainer[0].style.display = 'none'
+      }
+    }
+    getId()
+    const sendId = () =>{
+      const addID = document.getElementById('idInput') 
+      localStorage.setItem('id' , addID.value) 
+      getId()
+    }
+
+    const sendIDBUTTON = document.getElementById('addIdButton')
+    sendIDBUTTON.addEventListener('click' , sendId)
+
   </script>
 </head>
 
@@ -167,6 +188,10 @@
   <!-- NavBar -->
   <!-- alerts -->
   <div class="alert alert-success text-center" role="alert" id="name">   </div>
+  <div class="getID  my-3" id="my_id">
+    <input type="number" name="" class="form-control w-50" id="idInput" placeholder="هنا بنكتب ال ID بتاعنا">
+    <button class="btn btn-primary" id="addIdButton">ابعت ال ID</button>
+  </div>
   <div class="alert alert-success text-center" role="alert"> ده دليلك لكل حاجة في اللقاء  </div>
   <div class="alert alert-dark" role="alert"> 
     <p id="all_warnings" class="w-75"></p>

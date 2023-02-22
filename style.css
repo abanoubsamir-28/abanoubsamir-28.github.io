@@ -1,0 +1,155 @@
+/* #4F7344 */
+
+/* body {
+    background-color: #4F7344;
+} */
+* {
+    font-family: 'Marhey', cursive;
+}
+.nav-item {
+    padding: 15px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+.nav-item:hover {
+    background-color: #4F7344;
+}
+.alert-text {
+    word-break: break-all;
+}
+.emoji {
+    font-size: 20px;
+    min-width: 1.4em;
+    margin: 0.3em 0.4em;
+    text-align: center;
+}
+.emoji::after {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.monkey::after {
+    content: '🙈';
+    --emoji-1: '🙉';
+    --emoji-2: '🙊';
+    animation-name: threeFrames;
+    animation-duration: 2s;
+}
+@keyframes threeFrames {
+    33.333% {
+        content: var(--emoji-1);
+    }
+
+    66.666% {
+        content: var(--emoji-2);
+    }
+}
+.program {
+    background-color: #eee;
+    padding: 20px;
+}
+.program a {
+    border: 2px solid black;
+    font-weight: 900;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+.program a:hover {
+    background-color: #4F7344;
+    color: white;
+}
+.program-box {
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+.program-box h6 {
+    color: #4F7344;
+    border: 3px solid black;
+    padding: 10px 20px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    transition:.5s;
+    -webkit-transition:.5s;
+    -moz-transition:.5s;
+    -ms-transition:.5s;
+    -o-transition:.5s;
+}
+.program-box:hover h6 {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}
+.program-box h6:hover {
+    background: white;
+    color: black;
+
+}
+.speakers .speaker {
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.speakers .speaker:hover .layer {
+    top: 0;
+}
+.layer {
+    height: 100%;
+    width: 100%;
+    top: 100%;
+    background-color: rgba(79, 115, 68 , .4) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+.layer h1 {
+    color: white;
+    font-size: 20px;
+}
+.location {
+    padding: 30px;
+}
+.knowMore {
+    background-color: #4F7344;
+}
+.knowMore a {
+    border: 3px solid black !important;
+    border-radius: 12px;
+    padding: 10px 30px;
+    color: white;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+.knowMore a:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}
+.contact-us {
+    background-color: #eee;
+    padding: 20px;
+}
